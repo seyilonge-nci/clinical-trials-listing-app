@@ -4,9 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#000000" />
-		<title>
-			NCI Clinical Trials - National Cancer Institute
-		</title>
+		<title>NCI Clinical Trials - National Cancer Institute</title>
 		<link rel="stylesheet" href="%PUBLIC_URL%/index.css" />
 		<link rel="stylesheet" href="%PUBLIC_URL%/__nci-dev__common.css" />
 		<script type="text/javascript">
@@ -55,7 +53,7 @@
 				return urlparameter;
 			}
 			window.publicUrl = '%PUBLIC_URL%';
-			const configIndex = getUrlParam('cfg', '0');
+			const configIndex = getUrlParam('cfg', '2');
 			window.currentConfig = configIndex;
 			const cfgs = [
 				{
@@ -63,17 +61,20 @@
 					analyticsHandler: 'EddlAnalyticsHandler',
 					analyticsPublishedDate: 'unknown',
 					analyticsContentGroup: 'Clinical Trials: Custom',
-					apiBaseEndpoint: 'https://webapis.cancer.gov/',
+					apiEndpoint: 'https://clinicaltrialsapi.cancer.gov/v1/',
 					appId: '@@/DEFAULT_REACT_APP_ID',
 					baseHost: 'http://localhost:3000',
 					basePath: '/',
 					canonicalHost: 'https://www.cancer.gov',
-					dictionaryEndpoint: 'https://webapis.cancer.gov/glossary/v1/',
+					introText:
+						"<p>Clinical trials are research studies that involve people. The clinical trials on this list are for {{disease_normalized}}. All trials on the list are supported by NCI.</p><p>NCI's <a href='/about-cancer/treatment/clinical-trials/what-are-trials'>basic information about clinical trials</a> explains the types and phases of trials and how they are carried out. Clinical trials look at new ways to prevent, detect, or treat disease. You may want to think about taking part in a clinical trial. Talk to your doctor for help in deciding if one is right for you.</p>",
 					language: 'en',
+					metaDescription:
+						'NCI supports clinical trials studying new and more effective ways to detect and treat cancer. Find clinical trials for {{disease_normalized}}.',
+					noTrialsHtml:
+						'<p>There are no NCI-supported clinical trials for {{disease_normalized}} at this time. You can try a <a href=\\"/about-cancer/treatment/clinical-trials/search\\">new search</a> or <a href=\\"/contact\\">contact our Cancer Information Service</a> to talk about options for clinical trials.</p>',
+					pageTitle: '{{disease_label}} Clinical Trials',
 					rootId: 'NCI-app-root',
-					searchEndpoint: 'https://webapis.cancer.gov/sitewidesearch/v1/',
-					searchCollection: 'cgov',
-					searchSiteFilter: 'all',
 					siteName: 'National Cancer Institute',
 					title: 'NCI Clinical Trials',
 					trialListingPageType: 'Disease',
@@ -83,17 +84,20 @@
 					analyticsHandler: 'EddlAnalyticsHandler',
 					analyticsPublishedDate: 'unknown',
 					analyticsContentGroup: 'Clinical Trials: Custom',
-					apiBaseEndpoint: 'https://webapis.cancer.gov/',
+					apiEndpoint: 'https://clinicaltrialsapi.cancer.gov/v1/',
 					appId: '@@/DEFAULT_REACT_APP_ID',
 					baseHost: 'http://localhost:3000',
 					basePath: '/',
 					canonicalHost: 'https://www.cancer.gov',
-					dictionaryEndpoint: 'https://webapis.cancer.gov/glossary/v1/',
+					introText:
+						"<p>Clinical trials are research studies that involve people. The clinical trials on this list are for {{disease_normalized}}. All trials on the list are supported by NCI.</p><p>NCI's <a href='/about-cancer/treatment/clinical-trials/what-are-trials'>basic information about clinical trials</a> explains the types and phases of trials and how they are carried out. Clinical trials look at new ways to prevent, detect, or treat disease. You may want to think about taking part in a clinical trial. Talk to your doctor for help in deciding if one is right for you.</p>",
 					language: 'en',
+					metaDescription:
+						'NCI supports clinical trials studying new and more effective ways to detect and treat cancer. Find clinical trials for {{disease_normalized}}.',
+					noTrialsHtml:
+						'<p>There are no NCI-supported clinical trials for {{disease_normalized}} at this time. You can try a <a href=\\"/about-cancer/treatment/clinical-trials/search\\">new search</a> or <a href=\\"/contact\\">contact our Cancer Information Service</a> to talk about options for clinical trials.</p>',
+					pageTitle: '{{disease_label}} Clinical Trials',
 					rootId: 'NCI-app-root',
-					searchEndpoint: 'https://webapis.cancer.gov/sitewidesearch/v1/',
-					searchCollection: 'cgov',
-					searchSiteFilter: 'all',
 					siteName: 'National Cancer Institute',
 					title: 'NCI Clinical Trials',
 					trialListingPageType: 'Intervention',
@@ -103,21 +107,24 @@
 					analyticsHandler: 'EddlAnalyticsHandler',
 					analyticsPublishedDate: 'unknown',
 					analyticsContentGroup: 'Clinical Trials: Custom',
-					apiBaseEndpoint: 'https://webapis.cancer.gov/',
+					apiEndpoint: 'https://clinicaltrialsapi.cancer.gov/v1/',
 					appId: '@@/DEFAULT_REACT_APP_ID',
 					baseHost: 'http://localhost:3000',
 					basePath: '/',
+					browserTitle: 'Clinical Trials for Adult Metastatic Brain Tumors',
 					canonicalHost: 'https://www.cancer.gov',
-					dictionaryEndpoint: 'https://webapis.cancer.gov/glossary/v1/',
-					language: 'en',
+					introText: '',
+					itemsPerPage: 25,
+					metaDescription: 'Find clinical trials to treat adult brain tumors.',
+					noTrialsHtml: 'There are currently no available trials.',
+					pageTitle: 'Clinical Trials for Adult Metastatic Brain Tumors',
+					requestFilters:
+						'{"diseases.nci_thesaurus_concept_id": ["chicken", "foo", "oknn"], "primary_purpose.primary_purpose_code": "treatment"}',
 					rootId: 'NCI-app-root',
-					searchEndpoint: 'https://webapis.cancer.gov/sitewidesearch/v1/',
-					searchCollection: 'cgov',
-					searchSiteFilter: 'all',
 					siteName: 'National Cancer Institute',
 					title: 'NCI Clinical Trials',
 					trialListingPageType: 'Manual',
-				}
+				},
 			];
 
 			window.APP_PARAMS = cfgs[configIndex];
@@ -132,13 +139,6 @@
 					src="https://www.cancer.gov/publishedcontent/images/images/design-elements/logos/nci-logo-full.__v1.svg"
 					alt="National Cancer Institiute"
 				/>
-			</div>
-			<div class="mock-language-bar">
-				<div id="LangList1">
-					<ul>
-						<li><a href="/replaceme">Language Toggle</a></li>
-					</ul>
-				</div>
 			</div>
 		</div>
 
@@ -181,16 +181,6 @@
 				}
 			}
 			window.onload = function () {
-				document.documentElement.setAttribute(
-					'lang',
-					window.APP_PARAMS.language
-				);
-				// hide language toggle if no spanish base provided
-				document.querySelector('.mock-language-bar').style.display =
-					window.APP_PARAMS.altLanguageDictionaryBasePath &&
-					window.APP_PARAMS.altLanguageDictionaryBasePath !== ''
-						? 'block'
-						: 'none';
 				initJumpMenus();
 			};
 		</script>
