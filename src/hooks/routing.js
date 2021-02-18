@@ -2,7 +2,7 @@ import { useStateValue } from '../store/store';
 
 // Paths for app
 const appPaths = {
-	PurlPath: '/:purl'
+	BasePath: '/'
 };
 
 /**

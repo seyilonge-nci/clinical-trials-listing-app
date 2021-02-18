@@ -7,23 +7,27 @@ beforeEach(() => {
 		// page. Setting all defaults in order to make sure that a change
 		// to development defaults does not break a bunch of texts.
 		win.INT_TEST_APP_PARAMS = {
-				analyticsName: 'TrialListingApp',
-				siteName: 'National Cancer Institute',
-				title: 'NCI Clinical Trials',
-				analyticsContentGroup: 'Clinical Trials: Custom',
-				analyticsPublishedDate: 'unknown',
-				appId: '@@/DEFAULT_REACT_APP_ID',
-				baseHost: 'http://localhost:3000',
-				basePath: '/',
-				apiEndpoint: '/api/',
-				canonicalHost: 'https://www.cancer.gov',
-				itemsPerPage: 25,
-				trialListingPageType: 'Disease',
-				rootId: 'NCI-app-root',
-				siteName: 'National Cancer Institute',
-				pageTitle: 'Adult Brain Tumors Clinical Trials',
-				requestFilters:
-						'{"diseases.nci_thesaurus_concept_id": ["chicken", "foo", "oknn"], "primary_purpose.primary_purpose_code": "treatment"}',
+			analyticsName: 'TrialListingApp',
+			siteName: 'National Cancer Institute',
+			title: 'NCI Clinical Trials',
+			analyticsContentGroup: 'Clinical Trials: Custom',
+			analyticsPublishedDate: 'unknown',
+			appId: '@@/DEFAULT_REACT_APP_ID',
+			baseHost: 'http://localhost:3000',
+			basePath: '/',
+			apiEndpoint: '/api/',
+			canonicalHost: 'https://www.cancer.gov',
+			itemsPerPage: 25,
+			trialListingPageType: 'Disease',
+			rootId: 'NCI-app-root',
+			siteName: 'National Cancer Institute',
+			pageTitle: 'Adult Brain Tumors Clinical Trials',
+			requestFilters: {
+				'diseases.nci_thesaurus_concept_id': ['chicken', 'foo', 'oknn'],
+				'primary_purpose.primary_purpose_code': 'treatment',
+			},
+			resultsItemTitleLink:
+				'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v',
 		};
 		console.log(win.INT_TEST_APP_PARAMS);
 	});

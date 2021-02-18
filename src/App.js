@@ -10,13 +10,13 @@ import { Manual, NoListingType, PageNotFound } from './views';
 
 const App = () => {
 	let dynamicRoutes;
-	const { PurlPath } = useAppPaths();
+	const { BasePath } = useAppPaths();
 	const [{ trialListingPageType }] = useStateValue();
 
 	switch (trialListingPageType) {
 		case 'Manual':
 			dynamicRoutes = <Routes>
-				<Route path={PurlPath()} element={<Manual />} />
+				<Route path={BasePath()} element={<Manual />} />
 				<Route path="/*" element={<PageNotFound />} />
 			</Routes>;
 			break;

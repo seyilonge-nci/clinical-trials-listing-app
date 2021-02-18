@@ -51,7 +51,7 @@ describe('App component', () => {
 			},
 		]);
 
-		const { PurlPath } = useAppPaths();
+		const { BasePath } = useAppPaths();
 		const initialState = {
 			apiEndpoint,
 			language,
@@ -62,7 +62,7 @@ describe('App component', () => {
 		await act(async () => {
 			render(
 				<MockAnalyticsProvider>
-					<MemoryRouter initialEntries={[PurlPath({ purl: 'my-pretty-url' })]}>
+					<MemoryRouter initialEntries={[BasePath()]}>
 						<ClientContextProvider client={getAxiosClient(initialState)}>
 							<ComponentWithLocation RenderComponent={Manual} />
 						</ClientContextProvider>
@@ -72,7 +72,7 @@ describe('App component', () => {
 		});
 
 		const expectedLocationObject = {
-			pathname: '/my-pretty-url',
+			pathname: '/',
 			search: '',
 			hash: '',
 			state: null,

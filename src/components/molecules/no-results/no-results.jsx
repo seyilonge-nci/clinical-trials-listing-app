@@ -6,11 +6,9 @@ const NoResults = () => {
 	const [{ noTrialsHtml }] = useStateValue();
 
 	return (
-		<div>
-			<p>
-				<strong>{noTrialsHtml}</strong>
-			</p>
-		</div>
+		<>
+			<div dangerouslySetInnerHTML={{ __html: noTrialsHtml }}></div>
+		</>
 	);
 };
 

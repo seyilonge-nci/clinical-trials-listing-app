@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 
-import { NoResults, Results, Spinner } from '../../components';
+import { NoResults, ResultsList, Spinner } from '../../components';
 import CTLViewsHoC from '../CTLViewsHoC';
-import { useCustomQuery, useAppPaths } from '../../hooks';
+import { useCustomQuery } from '../../hooks';
 import { getClinicalTrials } from '../../services/api/actions';
 import { useStateValue } from '../../store/store';
 
@@ -15,6 +14,7 @@ const Manual = () => {
 			pageTitle,
 			requestFilters,
 			siteName,
+			introText,
 			language,
 			canonicalHost,
 			trialListingPageType,
@@ -22,8 +22,6 @@ const Manual = () => {
 	] = useStateValue();
 	const queryResponse = useCustomQuery(getClinicalTrials(requestFilters));
 	const tracking = useTracking();
-	const { PurlPath } = useAppPaths();
-	const location = useLocation();
 
 	useEffect(() => {
 		if (!queryResponse.loading && queryResponse.payload) {
@@ -39,9 +37,7 @@ const Manual = () => {
 				// These properties are required.
 				type: 'PageLoad',
 				event: 'TrialListingApp:Load:Results',
-				name:
-					canonicalHost.replace('https://', '') +
-					PurlPath({ purl: location.pathname.replace('/', '') }),
+				name: canonicalHost.replace('https://', '') + window.location.pathname,
 				title: pageTitle,
 				language: language === 'en' ? 'english' : 'spanish',
 				metaTitle: `${pageTitle} - ${siteName}`,
@@ -55,11 +51,12 @@ const Manual = () => {
 	return (
 		<div>
 			<h1>{pageTitle}</h1>
+			{introText.length > 0 && <h4>{introText}</h4>}
 			{(() => {
 				if (queryResponse.loading) {
 					return <Spinner />;
 				} else if (!queryResponse.loading && trialsPayload?.trials.length) {
-					return <Results />;
+					return <ResultsList results={trialsPayload.trials} />;
 				} else {
 					return <NoResults />;
 				}

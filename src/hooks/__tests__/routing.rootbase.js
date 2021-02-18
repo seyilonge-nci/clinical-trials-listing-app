@@ -11,7 +11,7 @@ describe('when base path is slash', () => {
 	]);
 
 	it('will replace paths with params', () => {
-		const { PurlPath } = useAppPaths();
-		expect(PurlPath({purl: 'my-pretty-url'})).toEqual('/my-pretty-url');
+		const { BasePath } = useAppPaths();
+		expect(BasePath()).toEqual('/');
 	});
 });

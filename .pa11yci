@@ -1,6 +1,5 @@
 {
   "urls": [
-    "http://localhost:3000",
-    "http://localhost:3000/my-pretty-url"
+    "http://localhost:3000"
   ]
 }

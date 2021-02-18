@@ -15,21 +15,23 @@ describe('<Manual />', () => {
 		const noTrialsHtml = 'There are currently no available trials.';
 		const pageTitle = 'Manual Listing Page';
 		const requestFilters =
-			'{"diseases.nci_thesaurus_concept_id": ["C5816", "C8550", "C3813"], "primary_purpose.primary_purpose_code": "treatment"}';
+			'{"diseases.nci_thesaurus_concept_id": ["chicken", "foo", "oknn"], "primary_purpose.primary_purpose_code": "treatment"}';
 		const title = 'NCI Clinical Trials';
-		const canonicalHost = "https://www.cancer.gov";
-		const trialListingPageType = "Manual";
+		const canonicalHost = 'https://www.cancer.gov';
+		const trialListingPageType = 'Manual';
+		const introText = 'Intro text';
 
 		useStateValue.mockReturnValue([
 			{
 				appId: 'mockAppId',
 				basePath,
+				introText,
 				noTrialsHtml,
 				pageTitle,
 				requestFilters,
 				title,
 				canonicalHost,
-				trialListingPageType
+				trialListingPageType,
 			},
 		]);
 
@@ -47,7 +49,7 @@ describe('<Manual />', () => {
 		await act(async () => {
 			render(
 				<MockAnalyticsProvider>
-					<MemoryRouter initialEntries={['/bla-bla-bla']}>
+					<MemoryRouter initialEntries={['/']}>
 						<ClientContextProvider client={client}>
 							<Manual />
 						</ClientContextProvider>
@@ -57,6 +59,7 @@ describe('<Manual />', () => {
 		});
 
 		expect(screen.getByText('Manual Listing Page')).toBeInTheDocument();
+		expect(screen.getByText('Intro text')).toBeInTheDocument();
 		expect(
 			screen.getByText('There are currently no available trials.')
 		).toBeInTheDocument();

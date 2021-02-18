@@ -1,0 +1,27 @@
+.result-list-item {
+	margin: 1.875em 0;
+
+	dt {
+		dfn {
+			a,
+			a:hover {
+				font-family: Montserrat, Avant Garde, Arial, sans-serif;
+				font-weight: 400;
+				font-size: 1.125em;
+				line-height: 1.111em;
+				text-decoration: none;
+			}
+		}
+	}
+
+	dd {
+		margin: 0.25em 0;
+
+		span {
+			a,
+			a:hover {
+				text-decoration: none;
+			}
+		}
+	}
+}
