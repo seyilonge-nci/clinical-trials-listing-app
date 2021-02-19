@@ -59,7 +59,6 @@ describe('<Manual />', () => {
 		});
 
 		expect(screen.getByText('Manual Listing Page')).toBeInTheDocument();
-		expect(screen.getByText('Intro text')).toBeInTheDocument();
 		expect(
 			screen.getByText('There are currently no available trials.')
 		).toBeInTheDocument();

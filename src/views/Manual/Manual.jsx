@@ -51,7 +51,11 @@ const Manual = () => {
 	return (
 		<div>
 			<h1>{pageTitle}</h1>
-			{introText.length > 0 && <h4>{introText}</h4>}
+			{introText.length > 0 &&
+				!queryResponse.loading &&
+				trialsPayload?.trials.length > 0 && (
+					<div dangerouslySetInnerHTML={{ __html: introText }}></div>
+				)}
 			{(() => {
 				if (queryResponse.loading) {
 					return <Spinner />;
