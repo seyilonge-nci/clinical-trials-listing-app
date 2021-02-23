@@ -13,6 +13,7 @@ describe('getLocationInfoFromSites', () => {
 				org_name: 'Wingstop',
 				org_city: 'Gaithersburg',
 				org_state_or_province: 'MD',
+				recruitment_status: 'active',
 			},
 		];
 		const expectedJSX = (
@@ -33,6 +34,7 @@ describe('getLocationInfoFromSites', () => {
 				org_name: 'Wingstop',
 				org_city: 'Gaithersburg',
 				org_state_or_province: 'YY',
+				recruitment_status: 'active',
 			},
 		];
 
@@ -58,30 +60,35 @@ describe('getLocationInfoFromSites', () => {
 				org_name: 'Wingstop',
 				org_city: 'Gaithersburg',
 				org_state_or_province: 'MD',
+				recruitment_status: 'active',
 			},
 			{
 				org_country: 'United States',
 				org_name: 'Burger King',
 				org_city: 'Fairfax',
 				org_state_or_province: 'VA',
+				recruitment_status: 'in_review',
 			},
 			{
 				org_country: 'Belgium',
 				org_name: 'Popeyes',
 				org_city: 'Brussels',
 				org_state_or_province: 'N/A',
+				recruitment_status: 'approved',
 			},
 			{
 				org_country: 'United States',
 				org_name: 'KFC',
 				org_city: 'New York City',
 				org_state_or_province: 'NY',
+				recruitment_status: 'approved',
 			},
 			{
 				org_country: 'United States',
 				org_name: "Arby's",
 				org_city: 'Arlington',
 				org_state_or_province: 'VA',
+				recruitment_status: 'enrolling_by_invitation',
 			},
 		];
 
@@ -107,12 +114,14 @@ describe('getLocationInfoFromSites', () => {
 				org_name: 'Wingstop',
 				org_city: 'Gaithersburg',
 				org_state_or_province: 'MD',
+				recruitment_status: 'active',
 			},
 			{
 				org_country: 'Brazil',
 				org_name: 'Burger King',
 				org_city: 'Fairfax',
 				org_state_or_province: 'VA',
+				recruitment_status: 'enrolling_by_invitation',
 			},
 		];
 
@@ -144,12 +153,14 @@ describe('getLocationInfoFromSites', () => {
 				org_name: 'Wingstop',
 				org_city: 'Gaithersburg',
 				org_state_or_province: 'MD',
+				recruitment_status: 'approved',
 			},
 			{
 				org_country: 'Brazil',
 				org_name: 'Burger King',
 				org_city: 'Fairfax',
 				org_state_or_province: 'VA',
+				recruitment_status: 'enrolling_by_invitation',
 			},
 		];
 
