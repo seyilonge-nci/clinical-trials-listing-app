@@ -8,12 +8,15 @@ import ReactDOM from 'react-dom';
 import { ClientContextProvider } from 'react-fetching-library';
 
 import App from './App';
-import { getAxiosClient } from './services/api/axios-client';
+import {
+	getAxiosClient,
+	replacingRequestInterceptor,
+} from './services/api/common';
 import * as serviceWorker from './serviceWorker';
 import reducer from './store/reducer';
 import { StateProvider } from './store/store';
 import { AnalyticsProvider, EddlAnalyticsProvider } from './tracking';
-import { getProductTestBase } from './utils';
+import { cleanURI, getProductTestBase } from './utils';
 import { ErrorBoundary } from './views';
 
 /**
@@ -33,13 +36,13 @@ const initialize = ({
 	appId = '@@/DEFAULT_REACT_APP_ID',
 	baseHost = 'http://localhost:3000',
 	basePath = '/',
-	apiEndpoint = 'https://clinicaltrialsapi.cancer.gov/v1/',
 	canonicalHost = 'https://www.cancer.gov',
 	browserTitle = '{{disease_label}} Clinical Trials',
 	resultsItemTitleLink = '',
 	introText = '',
 	itemsPerPage = 25,
 	language = 'en',
+  listingApiEndpoint = 'https://webapis-dev.cancer.gov/triallistingsupport/v1/',
 	metaDescription = 'NCI supports clinical trials studying new and more effective ways to detect and treat cancer. Find clinical trials for {{disease_normalized}}.',
 	noTrialsHtml = '<p>There are no NCI-supported clinical trials for {{disease_normalized}} at this time. You can try a <a href=\\"/about-cancer/treatment/clinical-trials/search\\">new search</a> or <a href=\\"/contact\\">contact our Cancer Information Service</a> to talk about options for clinical trials.</p>',
 	pageTitle = '{{disease_label}} Clinical Trials',
@@ -48,6 +51,7 @@ const initialize = ({
 	rootId = 'NCI-app-root',
 	siteName = 'National Cancer Institute',
 	title = 'NCI Clinical Trials',
+	trialsApiEndpoint = 'https://clinicaltrialsapi.cancer.gov/v1/',
 	viewPageUrlFormatter = '/clinicaltrials/{0}',
 } = {}) => {
 	const appRootDOMNode = document.getElementById(rootId);
@@ -55,7 +59,6 @@ const initialize = ({
 
 	// populate global state with init params
 	const initialState = {
-		apiEndpoint,
 		appId,
 		analyticsChannel,
 		analyticsContentGroup,
@@ -68,6 +71,7 @@ const initialize = ({
 		introText,
 		itemsPerPage,
 		language,
+		listingApiEndpoint,
 		metaDescription,
 		noTrialsHtml,
 		pageTitle,
@@ -75,6 +79,7 @@ const initialize = ({
 		trialListingPageType,
 		siteName,
 		title,
+		trialsApiEndpoint,
 		viewPageUrlFormatter,
 	};
 
@@ -101,11 +106,21 @@ const initialize = ({
 		children: PropTypes.node,
 	};
 
+		// Setup requestInterceptors for RTL client.
+		const requestInterceptors = [
+			replacingRequestInterceptor('clinical-trials-api', {
+				API_HOST: cleanURI(trialsApiEndpoint)
+			}),
+			replacingRequestInterceptor('listing-information-api', {
+					API_HOST: cleanURI(listingApiEndpoint)
+			})
+		].filter((item) => item !== null);
+
 	const AppBlock = () => {
 		return (
 			<StateProvider initialState={initialState} reducer={reducer}>
 				<AnalyticsHoC>
-					<ClientContextProvider client={getAxiosClient(initialState)}>
+					<ClientContextProvider client={getAxiosClient(requestInterceptors)}>
 						<ErrorBoundary>
 							<App />
 						</ErrorBoundary>

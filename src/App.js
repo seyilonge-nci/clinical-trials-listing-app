@@ -6,17 +6,21 @@ import './styles/app.scss';
 
 import { useAppPaths } from './hooks';
 import { useStateValue } from './store/store';
-import { Manual, NoListingType, PageNotFound } from './views';
+import { Manual, Disease, NoListingType, PageNotFound } from './views';
 
 const App = () => {
 	let dynamicRoutes;
-	const { BasePath } = useAppPaths();
+	const {
+		BasePath,
+		CodeOrPurlPath
+	} = useAppPaths();
 	const [{ trialListingPageType }] = useStateValue();
 
 	switch (trialListingPageType) {
 		case 'Disease':
 			dynamicRoutes = (
 				<Routes>
+					<Route path={CodeOrPurlPath()} element={<Disease />} />
 					<Route path="/*" element={<PageNotFound />} />
 				</Routes>
 			);
