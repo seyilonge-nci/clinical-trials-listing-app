@@ -13,7 +13,7 @@ import { useStateValue } from '../../store/store';
 
 import { TokenParser } from '../../utils';
 
-const Disease = ({ listingInfo }, ...rest ) => {
+const Disease = ({ listingInfo }) => {
 	const [trialsPayload, setTrialsPayload] = useState(null);
 	const [
 		{
@@ -29,13 +29,10 @@ const Disease = ({ listingInfo }, ...rest ) => {
 		},
 	] = useStateValue();
 
-	const {
-		conceptId,
-		name
-  } = listingInfo;
+	const { conceptId, name } = listingInfo;
 
 	const setReplacementText = () => {
-	// Replace tokens within page title, browser title, intro text, and meta description
+		// Replace tokens within page title, browser title, intro text, and meta description
 		const context = {
 			disease_label: name.label,
 			disease_normalized: name.normalized,
@@ -45,17 +42,17 @@ const Disease = ({ listingInfo }, ...rest ) => {
 			pageTitle: TokenParser.replaceTokens(pageTitle, context),
 			browserTitle: TokenParser.replaceTokens(browserTitle, context),
 			introText: TokenParser.replaceTokens(introText, context),
-			metaDescription: TokenParser.replaceTokens(metaDescription, context)
-		}
-	}
+			metaDescription: TokenParser.replaceTokens(metaDescription, context),
+		};
+	};
 
 	const setRequestFilters = () => {
 		return { 'diseases.nci_thesaurus_concept_id': conceptId };
-	}
+	};
 
 	const requestFilters = setRequestFilters();
 	const replacedText = setReplacementText();
-	const queryResponse = useCustomQuery(getClinicalTrials({requestFilters}));
+	const queryResponse = useCustomQuery(getClinicalTrials({ requestFilters }));
 	const tracking = useTracking();
 
 	useEffect(() => {
@@ -91,7 +88,10 @@ const Disease = ({ listingInfo }, ...rest ) => {
 				<meta property="og:title" content={`${replacedText.pageTitle}`} />
 				<meta property="og:url" content={baseHost + window.location.pathname} />
 				<meta name="description" content={replacedText.metaDescription} />
-				<meta property="og:description" content={replacedText.metaDescription} />
+				<meta
+					property="og:description"
+					content={replacedText.metaDescription}
+				/>
 				<link rel="canonical" href={canonicalHost + window.location.pathname} />
 			</Helmet>
 		);
@@ -126,10 +126,10 @@ Disease.propTypes = {
 		conceptId: PropTypes.array,
 		name: PropTypes.shape({
 			label: PropTypes.string,
-			normalized: PropTypes.string
+			normalized: PropTypes.string,
 		}),
 		prettyUrlName: PropTypes.string,
-	})
+	}),
 };
 
 export default CTLViewsHoC(Disease);
